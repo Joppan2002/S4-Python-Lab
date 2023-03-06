@@ -1,0 +1,15 @@
+sentence = input("Enter a sentence: ")
+old_word = input("Enter the word to replace: ")
+new_word = input("Enter the new word: ")
+
+# Split the sentence into words
+words = sentence.split()
+
+# Replace the old word with the new word
+new_words = [new_word if word == old_word else word for word in words]
+
+# Join the words back into a sentence
+new_sentence = " ".join(new_words)
+
+print("Original sentence:", sentence)
+print("New sentence:", new_sentence)
