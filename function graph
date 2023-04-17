@@ -1,0 +1,62 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_linear():
+    x = np.linspace(-10, 10, 100)
+    y = x
+    plt.plot(x, y)
+    plt.title("f(x) = y = x")
+    plt.show()
+
+def plot_quadratic():
+    y = np.linspace(-10, 10, 100)
+    x = y**2 + 1
+    plt.plot(x, y)
+    plt.title("x = y^2 + 1")
+    plt.show()
+
+def plot_cubic():
+    y = np.linspace(-10, 10, 100)
+    x = y**3 + 5
+    plt.plot(x, y)
+    plt.title("x = y^3 + 5")
+    plt.show()
+
+def plot_sine():
+    x = np.linspace(-10, 10, 100)
+    y = np.sin(x)
+    plt.plot(x, y)
+    plt.title("f(x) = sin(x)")
+    plt.show()
+
+def plot_exponential():
+    x = np.linspace(-10, 10, 100)
+    y = np.exp(x)
+    plt.plot(x, y)
+    plt.title("f(x) = e^x")
+    plt.show()
+
+while True:
+    print("1. f(x) = y = x")
+    print("2. x = y^2 + 1")
+    print("3. x = y^3 + 5")
+    print("4. f(x) = sin(x)")
+    print("5. f(x) = e^x")
+    print("6. Exit")
+    choice = int(input("Enter your choice (1-6): "))
+
+    if choice == 1:
+        plot_linear()
+    elif choice == 2:
+        plot_quadratic()
+    elif choice == 3:
+        plot_cubic()
+    elif choice == 4:
+        plot_sine()
+    elif choice == 5:
+        plot_exponential()
+    elif choice == 6:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Please enter a number between 1 and 6.")
