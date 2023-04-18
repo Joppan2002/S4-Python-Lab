@@ -1,0 +1,72 @@
+import numpy as np
+
+matrix_A_rows = int(input("Enter the number of rows for matrix-A: "))
+matrix_A_cols = int(input("Enter the number of columns for matrix-A: "))
+print()
+
+matrix_B_rows = int(input("Enter the number of rows for matrix-B: "))
+matrix_B_cols = int(input("Enter the number of columns for matrix-B: "))
+print()
+
+print("Enter values for matrix A")
+matrix_A = [[int(input(f"column{j+1}->Enter{i+1} element: ")) for j in range(matrix_A_cols)] for i in range(matrix_A_rows)]
+print()
+
+print("Enter values for matrix B")
+matrix_B = [[int(input(f"column{j+1}->Enter{i+1} element: ")) for j in range(matrix_B_cols)] for i in range(matrix_B_rows)]
+print()
+
+print("Matrix-A:")
+for i in matrix_A:
+    print(i)
+print()
+
+print("Matrix-B:")
+for i in matrix_B:
+    print(i)
+print()
+
+ch = 0
+while(ch != 5):
+    print("1. Matrix Addition\n2. Matrix Subtraction\n3. Matrix Multiplication\n4. Determinant\n5. Exit\n")
+    ch = int(input("Enter your choice: "))
+
+    if ch == 1:
+        if matrix_A_rows == matrix_B_rows and matrix_A_cols == matrix_B_cols:
+            matrix_sum = np.add(matrix_A, matrix_B)
+            print("Matrix Sum:")
+            for i in matrix_sum:
+                print(i)
+        else:
+            print("Cannot add matrices of different dimensions")
+    elif ch == 2:
+        if matrix_A_rows == matrix_B_rows and matrix_A_cols == matrix_B_cols:
+            matrix_diff = np.subtract(matrix_A, matrix_B)
+            print("Matrix Difference:")
+            for i in matrix_diff:
+                print(i)
+        else:
+            print("Cannot subtract matrices of different dimensions")
+    elif ch == 3:
+        if matrix_A_cols == matrix_B_rows:
+            matrix_product = np.dot(matrix_A, matrix_B)
+            print("Matrix Product:")
+            for i in matrix_product:
+                print(i)
+        else:
+            print("Cannot multiply matrices with incompatible dimensions")
+    elif ch == 4:
+        if matrix_A_rows == matrix_A_cols: 
+            determinant_A = np.linalg.det(matrix_A)
+            print("Determinant of matrix A:", determinant_A)
+        else:
+            print("Determinant can only be calculated for square matrices")
+        if matrix_B_rows == matrix_B_cols:    
+            determinant_B = np.linalg.det(matrix_B)
+            print("Determinant of matrix B:", determinant_B)
+        else:
+            print("Determinant can only be calculated for square matrices")
+    elif ch == 5:
+        print("Exiting the program")
+    else:
+        print("Invalid choice. Try again.") 
