@@ -1,0 +1,79 @@
+import csv
+import random
+import math
+
+# Function to calculate the Euclidean distance between two points
+def euclidean_distance(point1, point2):
+    return math.sqrt(sum((a - b) ** 2 for a, b in zip(point1, point2)))
+
+# Function to initialize random centroids
+def initialize_centroids(data, k):
+    centroids = random.sample(data, k)
+    return centroids
+
+# Function to assign data points to the nearest centroid
+def assign_to_clusters(data, centroids):
+    clusters = [[] for _ in range(len(centroids))]
+    
+    for point in data:
+        min_dist = float("inf")
+        cluster_index = -1
+        for i, centroid in enumerate(centroids):
+            dist = euclidean_distance(point, centroid)
+            if dist < min_dist:
+                min_dist = dist
+                cluster_index = i
+        clusters[cluster_index].append(point)
+    
+    return clusters
+
+# Function to update the centroids based on the cluster mean
+def update_centroids(clusters):
+    centroids = []
+    for cluster in clusters:
+        if cluster:
+            centroid = [sum(x) / len(cluster) for x in zip(*cluster)]
+            centroids.append(centroid)
+        else:
+            # If a cluster is empty, keep the centroid unchanged
+            centroids.append([])
+    return centroids
+
+# Function to check for convergence
+def has_converged(old_centroids, new_centroids, tolerance=1e-4):
+    if not old_centroids:
+        return False
+    return all(euclidean_distance(old, new) < tolerance for old, new in zip(old_centroids, new_centroids))
+
+# Read data from a CSV file
+data = []
+with open('your_data.csv', 'r') as csvfile:
+    csv_reader = csv.reader(csvfile)
+    for row in csv_reader:
+        data.append([float(row[0]), float(row[1])])  # Assuming two columns in the CSV file
+
+# Number of clusters (k)
+k = 2
+
+# Initialize centroids
+centroids = initialize_centroids(data, k)
+old_centroids = []
+
+# Main k-means loop
+max_iterations = 100
+iteration = 0
+
+while not has_converged(old_centroids, centroids) and iteration < max_iterations:
+    old_centroids = centroids
+    clusters = assign_to_clusters(data, centroids)
+    centroids = update_centroids(clusters)
+    iteration += 1
+
+# Print the final cluster assignments
+for i, cluster in enumerate(clusters):
+    print(f"Cluster {i}: {cluster}")
+
+# Print the final centroids
+print("Final Centroids:")
+for centroid in centroids:
+    print(centroid)
