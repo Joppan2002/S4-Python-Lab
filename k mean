@@ -49,6 +49,7 @@ def has_converged(old_centroids, new_centroids, tolerance=1e-4):
 data = []
 with open('your_data.csv', 'r') as csvfile:
     csv_reader = csv.reader(csvfile)
+    next(csv_reader)  # Skip the header row
     for row in csv_reader:
         data.append([float(row[0]), float(row[1])])  # Assuming two columns in the CSV file
 
@@ -97,29 +98,14 @@ for centroid in centroids:
 
 
 
-
-
-
-import csv
-
-# Sample data
-data = [
-    ["Name", "Age", "City"],
-    ["Alice", 25, "New York"],
-    ["Bob", 30, "Los Angeles"],
-    ["Charlie", 22, "Chicago"]
-]
-
-# Specify the CSV file name
-csv_file = 'output.csv'
-
-# Open the CSV file for writing
-with open(csv_file, 'w', newline='') as csvfile:
-    csv_writer = csv.writer(csvfile)
-
-    # Write the data to the CSV file
-    for row in data:
-        csv_writer.writerow(row)
-
-print(f"CSV file '{csv_file}' has been created.")
-
+Feature1	Feature2
+2.3	3.4
+4.5	5.1
+1.8	2.9
+3.5	4.7
+6.2	6.8
+5	4.2
+7.1	7.9
+8.5	8.2
+7	6.5
+9.2	9.8
